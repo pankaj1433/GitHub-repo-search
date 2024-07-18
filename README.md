@@ -10,6 +10,11 @@ available, and the number of open issues, number of forks, etc.
 npm install
 ```
 
+## Setup .env file
+Paste following token in your env file:
+```
+```
+
 ## Available Scripts
 To run app in dev mode:
 ```
