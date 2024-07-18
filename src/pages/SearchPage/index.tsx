@@ -1,34 +1,41 @@
-import React from 'react';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Pagination from '@mui/material/Pagination';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-
-import useSearch from '../../hooks/useSeach';
-import { Repository } from '../../types/gitRepository';
+import React from "react";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Pagination from "@mui/material/Pagination";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
+import useSearch from "../../hooks/useSeach";
+import { Repository } from "../../types/gitRepository";
 
 const SearchPage: React.FC = () => {
-  const { query, setQuery, searchResults, page, setPage, perPage, setPerPage } = useSearch();
+  const { query, setQuery, searchResults, page, setPage, perPage, setPerPage } =
+    useSearch();
 
   const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number,
+  ) => {
     setPage(value);
   };
 
-  const handlePerPageChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handlePerPageChange = (
+    event: React.ChangeEvent<{ value: unknown }>,
+  ) => {
     setPerPage(event.target.value as number);
   };
 
   return (
-    <Box>
-      <Typography variant="h4" component="h1" gutterBottom>
-        GitHub Repository Search
-      </Typography>
+    <Box mt={4}>
       <TextField
         fullWidth
         label="Enter repository name..."
@@ -40,15 +47,32 @@ const SearchPage: React.FC = () => {
       {searchResults ? (
         <Box mt={4}>
           {searchResults.items.map((repo: Repository) => (
-            <Box key={repo.id} mb={2}>
-              <Typography variant="h6">{repo.full_name}</Typography>
-              <Typography>{repo.description}</Typography>
-              <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
-                View on GitHub
-              </a>
-            </Box>
+            <Card key={repo.id} variant="outlined" sx={{ mb: 2 }}>
+              <CardContent>
+                <Typography variant="h6" component="div">
+                  {repo.full_name}
+                </Typography>
+                <Typography sx={{ mb: 1.5 }} color="textSecondary">
+                  {repo.description}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button
+                  size="small"
+                  component={Link}
+                  to={`/search/repo-detail/${repo.owner.login}/${repo.name}`}
+                >
+                  View Details
+                </Button>
+              </CardActions>
+            </Card>
           ))}
-          <Box mt={4} display="flex" justifyContent="space-between" alignItems="center">
+          <Box
+            mt={4}
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <Pagination
               count={Math.ceil(searchResults.total_count / perPage)}
               page={page}
@@ -59,7 +83,7 @@ const SearchPage: React.FC = () => {
               value={perPage}
               onChange={handlePerPageChange}
               displayEmpty
-              inputProps={{ 'aria-label': 'Items per page' }}
+              inputProps={{ "aria-label": "Items per page" }}
             >
               <MenuItem value={10}>10</MenuItem>
               <MenuItem value={20}>20</MenuItem>

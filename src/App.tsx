@@ -1,16 +1,13 @@
 import { RouterProvider } from "react-router-dom";
 
-import PageWrapper from './components/PageWrapper';
-import { SearchProvider } from './context/SearchContext';
+import { SearchProvider } from "./context/SearchContext";
 
 import router from "./pages";
 
 const App = () => (
   <SearchProvider>
-    <PageWrapper>
-      <RouterProvider router={router} />
-    </PageWrapper>
+    <RouterProvider router={router} />
   </SearchProvider>
-)
+);
 
 export default App;
