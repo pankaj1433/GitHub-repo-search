@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Pagination from "@mui/material/Pagination";
-import Select from "@mui/material/Select";
+import Select,  { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -22,16 +22,16 @@ const SearchPage: React.FC = () => {
   };
 
   const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
+    _: React.ChangeEvent<unknown>,
     value: number,
   ) => {
     setPage(value);
   };
 
   const handlePerPageChange = (
-    event: React.ChangeEvent<{ value: unknown }>,
+    event: SelectChangeEvent<number>,
   ) => {
-    setPerPage(event.target.value as number);
+    setPerPage(Number(event.target.value));
   };
 
   return (

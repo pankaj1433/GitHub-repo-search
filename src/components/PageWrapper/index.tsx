@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Container from "@mui/material/Container";
 import AppBar from "@mui/material/AppBar";

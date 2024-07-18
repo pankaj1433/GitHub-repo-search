@@ -11,9 +11,8 @@ npm install
 ```
 
 ## Setup .env file
-Paste following token in your env file:
-```
-```
+Paste `VITE_GITHUB_TOKEN` token value in your env file, provided in email as github does not allow personal access token to be published.
+
 
 ## Available Scripts
 To run app in dev mode:
